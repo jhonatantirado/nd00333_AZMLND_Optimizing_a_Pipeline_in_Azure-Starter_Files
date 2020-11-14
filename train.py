@@ -19,7 +19,7 @@ ds = TabularDatasetFactory.from_delimited_files(path, validate=True, include_pat
 
 # TODO: Split data into train and test sets.
 
-train, test = ds.random_split(80, seed=None)
+train, test = ds.random_split(0.8, seed=None)
 x_train, y_train = clean_data(train)
 x_test, y_test = clean_data(test)
 
