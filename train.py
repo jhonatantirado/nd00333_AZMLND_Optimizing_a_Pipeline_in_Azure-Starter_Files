@@ -20,8 +20,6 @@ ds = TabularDatasetFactory.from_delimited_files(path, validate=True, include_pat
 # TODO: Split data into train and test sets.
 
 train, test = ds.random_split(0.8, seed=None)
-x_train, y_train = clean_data(train)
-x_test, y_test = clean_data(test)
 
 ### YOUR CODE HERE ###a
 
@@ -66,6 +64,9 @@ def main():
 
     run.log("Regularization Strength:", np.float(args.C))
     run.log("Max iterations:", np.int(args.max_iter))
+
+    x_train, y_train = clean_data(train)
+    x_test, y_test = clean_data(test)
 
     model = LogisticRegression(C=args.C, max_iter=args.max_iter).fit(x_train, y_train)
 
