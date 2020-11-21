@@ -17,11 +17,7 @@ from azureml.data.dataset_factory import TabularDatasetFactory
 path = "https://automlsamplenotebookdata.blob.core.windows.net/automl-sample-notebook-data/bankmarketing_train.csv"
 ds = TabularDatasetFactory.from_delimited_files(path, validate=True, include_path=False, infer_column_types=True, set_column_types=None, separator=',', header=True, partition_format=None, support_multi_line=False, empty_as_string=False, encoding='utf8')
 
-# TODO: Split data into train and test sets.
-
-train, test = ds.random_split(0.8, seed=None)
-
-### YOUR CODE HERE ###a
+### YOUR CODE HERE ###
 
 run = Run.get_context()
 
@@ -32,6 +28,7 @@ def clean_data(data):
 
     # Clean and one hot encode data
     x_df = data.to_pandas_dataframe().dropna()
+    #print(x_df.shape)
     jobs = pd.get_dummies(x_df.job, prefix="job")
     x_df.drop("job", inplace=True, axis=1)
     x_df = x_df.join(jobs)
@@ -49,7 +46,12 @@ def clean_data(data):
     x_df["day_of_week"] = x_df.day_of_week.map(weekdays)
     x_df["poutcome"] = x_df.poutcome.apply(lambda s: 1 if s == "success" else 0)
 
+    #print(x_df.shape)
+
     y_df = x_df.pop("y").apply(lambda s: 1 if s == "yes" else 0)
+
+    #print(x_df.shape)
+    #print(y_df.shape)
 
     return x_df, y_df
 
@@ -65,8 +67,9 @@ def main():
     run.log("Regularization Strength:", np.float(args.C))
     run.log("Max iterations:", np.int(args.max_iter))
 
-    x_train, y_train = clean_data(train)
-    x_test, y_test = clean_data(test)
+    x, y = clean_data(ds)
+    # TODO: Split data into train and test sets.
+    x_train, x_test, y_train, y_test = train_test_split(x, y, test_sixe=0.2, random_state=36)
 
     model = LogisticRegression(C=args.C, max_iter=args.max_iter).fit(x_train, y_train)
 
