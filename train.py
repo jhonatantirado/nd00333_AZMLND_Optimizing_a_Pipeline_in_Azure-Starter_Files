@@ -73,7 +73,7 @@ def main():
     accuracy = model.score(x_test, y_test)
     run.log("Accuracy", np.float(accuracy))
     os.makedirs('./outputs', exist_ok=True)
-    joblib.dump(value=model, './outputs/hd-model.joblib')
+    joblib.dump(value=model, filename='./outputs/hd-model.joblib')
 
 if __name__ == '__main__':
     main()
