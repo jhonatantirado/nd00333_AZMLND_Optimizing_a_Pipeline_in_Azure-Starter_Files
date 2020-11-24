@@ -126,7 +126,7 @@ Model(workspace=Workspace.create(name='quick-starts-ws-127467', subscription_id=
 
 Also, we found out that the most important feature to determine the outcome of the best AutoML model is the "duration" of the phone call. See image below.
 
-![AutoML feature importance for the best model](https://github.com/jhonatantirado/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/images/AutoMLRanking.png)
+![AutoML feature importance for the best model](https://github.com/jhonatantirado/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/images/AutoMLBestModelFeaturesImportance.png)
 
 ## Pipeline comparison
 **Compare the two models and their performance. What are the differences in accuracy? In architecture? If there was a difference, why do you think there was one?**
