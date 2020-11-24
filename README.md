@@ -124,6 +124,10 @@ Pipeline(memory=None,
 Model(workspace=Workspace.create(name='quick-starts-ws-127467', subscription_id='94e14ad4-bf97-47e8-aae0-f9b85a7befa8', resource_group='aml-quickstarts-127467'), name=bank-marketing-automl-model, id=bank-marketing-automl-model:1, version=1, tags={'Method': 'AutoML'}, properties={'accuracy': '0.9153641881638848'})
 ```
 
+Also, we found out that the most important feature to determine the outcome of the best AutoML model is the "duration" of the phone call. See image below.
+
+![AutoML feature importance for the best model](https://github.com/jhonatantirado/nd00333_AZMLND_Optimizing_a_Pipeline_in_Azure-Starter_Files/blob/master/images/AutoMLRanking.png)
+
 ## Pipeline comparison
 **Compare the two models and their performance. What are the differences in accuracy? In architecture? If there was a difference, why do you think there was one?**
 
@@ -132,7 +136,7 @@ The same dataset was used, cleaned, one-hot encoded, and split. An experiment an
 The AutoML experiment was configured to run a classification task, with a maximum of 4 concurrent iterations (the computing cluster has 4 nodes), and 2 cross validation groups.
 Finally, the best performing model was registered in Azure ML, and the computing cluster was deleted.
 
-As we can see, the accuracy of the best performing models is 91.40 %, using the Voting Ensemble approach, which relies on multiple models instead of a single one, to classify an instance or predict an outcome.
+As we can see, the accuracy of the best performing models is 91.53 %, using the Voting Ensemble approach, which relies on multiple models instead of a single one, to classify an instance or predict an outcome.
 The biggest difference is that the Hyperdrive experiment uses only an algorithm and searches for the best hyperparameters, while the AutoML experiment tries different algorithms and hyperparameters. Other than that, the workflow is similar. Also, the train.py script was only used in the Hyperdrive experiment.
 
 ## Future work
